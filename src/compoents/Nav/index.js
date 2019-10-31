@@ -18,6 +18,8 @@ const Nav = (props) => {
                 <ul>
                     <li>Welcome</li>
                     <li><Link onClick={handleLogout} to="">Logout</Link></li>
+                    <li><Link to="/UserDetails">Manage User</Link></li>
+
                 </ul>
             }
         </>

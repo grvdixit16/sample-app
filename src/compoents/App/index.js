@@ -6,6 +6,7 @@ import Home from '../Home';
 import About from '../About';
 import Login from '../Login';
 import Spinner from '../Spinner';
+import UserDetails from '../UserDetails';
 import './App.css';
 
 function App() {
@@ -16,6 +17,8 @@ function App() {
         <PrivateRoute exact path="/" component={Home} />
         <PrivateRoute path="/about" component={About} />
         <Route path="/login" component={Login} />
+        <PrivateRoute path="/UserDetails" component={UserDetails} />
+
         <Spinner />
       </BrowserRouter>
     </div>
