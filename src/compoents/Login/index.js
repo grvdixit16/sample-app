@@ -1,16 +1,15 @@
-import React, {useState} from 'react';
-import {connect} from 'react-redux';
-import {userLogin} from '../../actions/auth.action';
-import authService from '../../services/auth.service';
+import React, { useState } from 'react';
+import { connect } from 'react-redux';
+import { userLogin } from '../../actions/auth.action';
 
-function Login(props){
+function Login(props) {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
     const handleChange = (e) => {
-        if(e.target.name === 'username'){
+        if (e.target.name === 'username') {
             setUsername(e.target.value);
-        }else if(e.target.name === 'password'){
+        } else if (e.target.name === 'password') {
             setPassword(e.target.value);
         }
     };
@@ -20,7 +19,11 @@ function Login(props){
         props.login(username, password);
     };
 
-    return(
+    if (props.isLoggedIn) {
+        props.history.push('/');
+    }
+
+    return (
         <form onSubmit={handleLogin}>
             <div>
                 <label>Username</label>
@@ -37,10 +40,16 @@ function Login(props){
     );
 }
 
+const mapStateToProps = (store) => {
+    return {
+        isLoggedIn: store.authReducer.isLoggedIn
+    }
+};
+
 const mapDispatchToProps = (dispatch) => {
     return {
-        login:(username, password) => dispatch(userLogin(username, password))
+        login: (username, password) => dispatch(userLogin(username, password))
     };
 };
 
-export default connect(null, mapDispatchToProps)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
